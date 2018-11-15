@@ -1,0 +1,86 @@
+#QUESTION1
+
+```{r}
+
+odd_count <- function(x) {
+  odd_num = 0
+  for(i in 1:length(x)) {
+    if(x[i] %% 2 == 1) 
+      odd_num  = odd_num+1
+    
+    }
+       return(odd_num)}
+
+
+odd_count_vec <- function(x){
+sum(x %% 2)
+  
+}
+
+boxplot(microbenchmark(odd_count(1:100), odd_count_vec(1:100)))
+
+```
+
+#QUESTION2
+
+```{r}
+sort_vec = function(x, ascending) {
+  
+if (length(x) < 2) return (x)
+  
+for(last in length(x):2) {
+  
+for(first in 1:(last - 1)) {
+  if(ascending){
+if(x[first] > x[first + 1]){
+  
+temp = x[first]
+x[first] = x[first + 1]
+x[first + 1] = temp
+
+}
+  }
+  else{
+    if(x[first] < x[first + 1]){
+  
+temp = x[first]
+x[first] = x[first + 1]
+x[first + 1] = temp
+
+}
+  }
+}
+}
+return(x)
+}
+
+sort_vec(1:9, F)
+sort_vec(1:9, T)
+
+```
+#QUESTION3
+
+```{r}
+N = 1000
+N = 10000
+N = 1000000
+data_series = 0
+
+system.time({for (i in 2:N){
+data_series[i] = data_series[i-1] + sample(c(-1, 1), 1)
+}
+})
+
+
+system.time({
+  steps <- sample(c(-1, 1), N, replace = TRUE)
+  for (i in 2:N){
+data_series[i] = data_series[i-1] + steps[i-1]
+  }
+  
+})
+
+
+
+```
+
